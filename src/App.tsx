@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import Reactotron from "reactotron-react-js";
 
 const App: React.FC = () => {
   const defaultCountValue = 0;
@@ -15,6 +16,10 @@ const App: React.FC = () => {
     setCount(defaultCountValue);
   };
 
+  useEffect(() => {
+    Reactotron.trackState({ count });
+  }, [count]);
+
   return (
     <div
       style={{
@@ -26,7 +31,13 @@ const App: React.FC = () => {
     >
       <label>
         Count:
-        <input value={count} type="number" />
+        <input
+          value={count}
+          type="number"
+          onChange={e => {
+            setCount(Number(e.target.value));
+          }}
+        />
       </label>
       <button onClick={() => handleIncrement(count)}>+</button>
       <button onClick={() => handleDecrement(count)}>-</button>

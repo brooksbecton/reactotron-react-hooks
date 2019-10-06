@@ -1,5 +1,5 @@
-import Reactotron from 'reactotron-react-js'
-
-Reactotron
-  .configure() // we can use plugins here -- more on this later
-  .connect() // let's connect!
+import Reactotron from "reactotron-react-js";
+import { plugin } from "./reactotron-react-hooks";
+Reactotron.configure()
+  .use(plugin)
+  .connect();
