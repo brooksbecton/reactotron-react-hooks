@@ -32,8 +32,12 @@ export function plugin(reactotron: Reactotron) {
     },
   };
 
-  function sendSubscriptions(state: { count: number }) {
-    reactotron.stateValuesChange([{ path: "count", value: state.count || 0 }]);
+  function sendSubscriptions(state: { [key: string]: number }) {
+    const subscriptions = Object.keys(state).map(key => ({
+      path: key,
+      value: state[key],
+    }));
+    reactotron.stateValuesChange(subscriptions);
   }
 
   function onCommand(command: any) {

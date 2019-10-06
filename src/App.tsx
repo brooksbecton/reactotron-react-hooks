@@ -3,7 +3,9 @@ import Reactotron from "reactotron-react-js";
 
 const App: React.FC = () => {
   const defaultCountValue = 0;
+  const defaultName = "";
   const [count, setCount] = useState(defaultCountValue);
+  const [name, setName] = useState(defaultName);
 
   const handleIncrement = (currentCount: number) => {
     setCount(currentCount + 1);
@@ -17,8 +19,8 @@ const App: React.FC = () => {
   };
 
   useEffect(() => {
-    Reactotron.trackState({ count });
-  }, [count]);
+    Reactotron.trackState({ count, name });
+  }, [count, name]);
 
   return (
     <div
@@ -29,19 +31,31 @@ const App: React.FC = () => {
         paddingTop: "20%",
       }}
     >
-      <label>
-        Count:
-        <input
-          value={count}
-          type="number"
-          onChange={e => {
-            setCount(Number(e.target.value));
-          }}
-        />
-      </label>
-      <button onClick={() => handleIncrement(count)}>+</button>
-      <button onClick={() => handleDecrement(count)}>-</button>
-      <button onClick={handleReset}>Reset</button>
+      <>
+        <label>
+          Count:
+          <input
+            value={count}
+            type="number"
+            onChange={e => {
+              setCount(Number(e.target.value));
+            }}
+          />
+        </label>
+        <button onClick={() => handleIncrement(count)}>+</button>
+        <button onClick={() => handleDecrement(count)}>-</button>
+        <button onClick={handleReset}>Reset</button>
+      </>
+      <div>
+        <label>
+          Name
+          <input
+            type="text"
+            onChange={e => setName(e.target.value)}
+            value={name}
+          />
+        </label>
+      </div>
     </div>
   );
 };
