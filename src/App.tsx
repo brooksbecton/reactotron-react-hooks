@@ -19,7 +19,7 @@ const App: React.FC = () => {
   };
 
   useEffect(() => {
-    Reactotron.trackState({ count, name });
+    Reactotron.trackState({ count, name: { first: name, last: name } });
   }, [count, name]);
 
   return (

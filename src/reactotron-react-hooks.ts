@@ -48,7 +48,15 @@ export function plugin(reactotron: Reactotron) {
   }
 
   function trackState(state: any) {
+    const elapsed = reactotron.startTimer();
+
+    const ms = elapsed();
     _state = state;
+    reactotron.send("state.action.complete", {
+      name: "name",
+      action: "Change",
+      ms: ms,
+    });
     sendSubscriptions(_state);
   }
 
